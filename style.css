@@ -65,7 +65,7 @@ div {
 
 
 tr {
-    border: 2px solid black;
+
     text-align: center;
     font-size: 1.5em;
     color: whitesmoke;
@@ -81,6 +81,10 @@ tr {
     font-size: 1.2em;
     color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.5);
+}
+
+tbody {
+    border: 2px solid black;
 }
 
 
