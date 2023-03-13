@@ -8,40 +8,70 @@ let lista = [];
 
 input.focus();
 
-buttonAd.addEventListener("click", () => {
-    lista.push(input.value);
-    input.value = "";
-
-    let tbody = document.getElementById("tbody");
-    tbody.innerText = "";
-
-    for(let i = 0; i < lista.length; i++) {
-       let tr = tbody.insertRow();
-       tr.textContent = lista[i];
+function adicionarItens() {
+    if(lista.indexOf(input.value) != -1) {
+        alert("Esse item já está na lista!");
     }
+    else if(input.value === "") {
+        alert("Digite um item!")
+    }
+    else {
+        lista.push(input.value);
 
-    input.focus();
+        let tbody = document.getElementById("tbody");
+        tbody.innerText = "";
 
-})
-
-buttonRm.addEventListener("click", () => {
-    for(let i = 0; i < lista.length; i++) {
-        if(input.value == lista[i]) {
-            lista.splice(lista.indexOf(input.value), 1);
+        for(let i = 0; i < lista.length; i++) {
+            let tr = tbody.insertRow();
+            tr.textContent = lista[i];
         }
     }
-
-    input.value = "";
     
-    let tbody = document.getElementById("tbody");
-    tbody.innerText = "";
-
-    for(let i = 0; i < lista.length; i++) {
-       let tr = tbody.insertRow();
-       tr.textContent = lista[i];
-    }
-
+    input.value = "";
     input.focus();
+
+}
+
+buttonAd.addEventListener("click", () => {
+    adicionarItens();
+})
+
+
+function removerItens() {
+    if(lista.indexOf(input.value) === -1) {
+        alert("Esse item não está na lista!")
+    }
+    else {
+        for(let i = 0; i < lista.length; i++) {
+            if(input.value == lista[i]) {
+                lista.splice(lista.indexOf(input.value), 1);
+            }
+        }
+        
+        let tbody = document.getElementById("tbody");
+        tbody.innerText = "";
+    
+        for(let i = 0; i < lista.length; i++) {
+           let tr = tbody.insertRow();
+           tr.textContent = lista[i];
+        }
+    }
+    
+    input.value = "";
+    input.focus();
+}
+
+buttonRm.addEventListener("click", () => {
+    removerItens();   
+})
+
+input.addEventListener("keyup", (event) => {
+    if(event.code === "Enter") {
+        adicionarItens();
+    }
+    else if(event.code === "Delete") {
+        removerItens();
+    }
 })
 
 
